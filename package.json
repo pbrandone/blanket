@@ -6,7 +6,12 @@
   "dependencies": {
     "gatsby": "^1.9.127",
     "gatsby-link": "^1.6.30",
-    "gatsby-plugin-react-helmet": "^1.0.8"
+    "gatsby-plugin-netlify": "^1.0.9",
+    "gatsby-plugin-nprogress": "^1.0.8",
+    "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-styled-components": "^2.0.3",
+    "gatsby-source-prismic": "^0.1.4",
+    "styled-components": "^2.2.4"
   },
   "keywords": [
     "gatsby"
