@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  padding: 50px;
+  padding: 24px;
 `;
 
 const Inner = styled.div`
