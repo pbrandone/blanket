@@ -1,13 +1,24 @@
-# gatsby-starter-default
-The default Gatsby starter
+# blanket studio
+Built with [Gatsby](https://www.gatsbyjs.org/)
 
-For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/)
-
-Install this starter (assuming Gatsby is installed) by running from your CLI:
+## Install dependencies
+Make sure you have node and yarn installed and run
 ```
-gatsby new gatsby-example-site
+yarn
 ```
 
-## Deploy
+## Run development mode
+```
+yarn develop
+```
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+A server will start at `http://localhost:8000/`
+
+You can access GraphiQL at `http://localhost:8000/___graphql`
+
+## Make a Build
+```
+yarn build
+```
+
+Gatsby will build the site to `public`
