@@ -1,4 +1,5 @@
 const path = require('path');
+const collectionsRoute = require('./src/constants/collectionsRoute');
 
 exports.onCreateNode = ({ node, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
@@ -26,7 +27,7 @@ exports.onCreatePage = ({ page, boundActionCreators }) => {
 };
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+  const { createPage, createRedirect } = boundActionCreators;
   return new Promise(resolve => {
     graphql(`
       {
@@ -41,9 +42,23 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       }
     `).then(result => {
+      const firstSlug = result.data.allPrismicDocument.edges[0].node.fields.slug;
+
+      createRedirect({
+        fromPath: `/${collectionsRoute}`,
+        redirectInBrowser: true,
+        toPath: `${collectionsRoute}/${firstSlug}`
+      });
+
+      createRedirect({
+        fromPath: `/${collectionsRoute}/`,
+        redirectInBrowser: true,
+        toPath: `/${collectionsRoute}/${firstSlug}/`
+      });
+
       result.data.allPrismicDocument.edges.map(({ node }) => {
         createPage({
-          path: node.fields.slug,
+          path: `${collectionsRoute}/${node.fields.slug}`,
           component: path.resolve('./src/templates/collection.js'),
           context: {
             // Data passed to context is available in page queries as GraphQL variables.

@@ -1,41 +1,39 @@
 import React from 'react';
-import { graphql } from 'graphql';
+import PropTypes from 'prop-types';
 
-import { siteContentData } from '../constants/propTypes';
+import { allPrismicDocumentNode } from '../constants/propTypes';
+
+import Home from '../components/Home/Home';
 
 const IndexPage = ({ data }) => {
-  console.log(data);
+  const image = data.allPrismicDocument.edges[0].node.data.coverImage.url;
 
   return (
-    <div>
-      Home
-    </div>
+    <Home coverImageUrl={image} />
   );
 };
 
 IndexPage.propTypes = {
-  ...siteContentData
+  ...allPrismicDocumentNode({
+    data: PropTypes.shape({
+      coverImage: PropTypes.shape({
+        url: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired
+  })
 };
 
 export default IndexPage;
 
-export const query = graphql`
+export const indexQuery = graphql`
   query IndexPage {
-    siteContent: allPrismicDocument(filter: { type: {ne: "collection" } } ) {
+    allPrismicDocument(filter: { type: {ne: "collection" } } ) {
       edges {
         node {
           data {
-            siteTitle
-            siteDescription {
-              text
-            }
             coverImage {
               url
             }
-            phoneNumber
-            emailAddress
-            instagramUrl
-            facebookUrl
           }
         }
       }
