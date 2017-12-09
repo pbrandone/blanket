@@ -6,11 +6,9 @@ import { allPrismicDocumentNode } from '../constants/propTypes';
 import Home from '../components/Home/Home';
 
 const IndexPage = ({ data }) => {
-  const image = data.allPrismicDocument.edges[0].node.data.coverImage.url;
+  const { url: image } = data.allPrismicDocument.edges[0].node.data.coverImage;
 
-  return (
-    <Home coverImageUrl={image} />
-  );
+  return <Home coverImageUrl={image} />;
 };
 
 IndexPage.propTypes = {

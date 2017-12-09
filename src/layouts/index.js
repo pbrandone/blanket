@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import '../style/index';
 import { allPrismicDocumentNode } from '../constants/propTypes';
 
+import MetaHead from '../components/SEO/MetaHead';
 import Sidebar from '../components/Sidebar/Sidebar';
 
 const Wrapper = styled.div`
@@ -33,15 +34,32 @@ const Content = styled.div`
 
 const TemplateWrapper = ({ children, data }) => {
   const { allPrismicDocument: { edges: collections } } = data;
+  const {
+    coverImage: { url: image },
+    siteTitle: title,
+    siteDescription,
+    siteKeywords: keywords
+  } = data.seoContent.edges[0].node.data;
+  const description = siteDescription[0].text;
 
   return (
     <Wrapper>
+
+      <MetaHead
+        title={title}
+        description={description}
+        keywords={keywords}
+        image={image}
+      />
+
       <SidebarWrapper>
         <Sidebar collections={collections} />
       </SidebarWrapper>
+
       <Content>
         {children()}
       </Content>
+
     </Wrapper>
   );
 };
@@ -53,6 +71,27 @@ TemplateWrapper.propTypes = {
       collectionTitle: PropTypes.arrayOf(
         PropTypes.shape({
           text: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired
+    }).isRequired
+  }, {
+    seoContent: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          node: PropTypes.shape({
+            data: PropTypes.shape({
+              coverImage: PropTypes.shape({
+                url: PropTypes.string.isRequired
+              }).isRequired,
+              siteTitle: PropTypes.string.isRequired,
+              siteDescription: PropTypes.arrayOf(
+                PropTypes.shape({
+                  text: PropTypes.string.isRequired
+                }).isRequired
+              ).isRequired,
+              siteKeywords: PropTypes.string.isRequired
+            }).isRequired
+          }).isRequired
         }).isRequired
       ).isRequired
     }).isRequired
@@ -71,6 +110,22 @@ export const query = graphql`
             collectionTitle {
               text
             }
+          }
+        }
+      }
+    }
+    seoContent: allPrismicDocument(filter: { type: {ne: "collection" } } ) {
+      edges {
+        node {
+          data {
+            coverImage {
+              url
+            }
+            siteTitle
+            siteDescription {
+              text
+            }
+            siteKeywords
           }
         }
       }
