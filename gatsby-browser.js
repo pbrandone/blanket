@@ -47,6 +47,7 @@ class ReplaceComponentRenderer extends Component {
     };
 
     this.listenerHandler = this.listenerHandler.bind(this);
+    this.getTransitionStyles = this.getTransitionStyles.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +79,14 @@ class ReplaceComponentRenderer extends Component {
     });
   }
 
+  getTransitionStyles(status) {
+    if (this.props.location.pathname === '/' && status === 'entering') {
+      return { opacity: 1 };
+    }
+
+    return styles[status];
+  }
+
   render() {
     const transitionProps = {
       timeout: {
@@ -94,7 +103,7 @@ class ReplaceComponentRenderer extends Component {
         {
           (status) => {
             return (
-              <div style={styles[status]}>
+              <div style={this.getTransitionStyles(status)}>
                 {createElement(this.props.pageResources.component, {
                   ...this.props,
                   ...this.props.pageResources.json
