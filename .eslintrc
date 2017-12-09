@@ -17,6 +17,9 @@
       "experimentalObjectRestSpread": true
     }
   },
+  "globals": {
+    "graphql": true
+  },
   "env": {
     "browser": true,
     "node": true,
