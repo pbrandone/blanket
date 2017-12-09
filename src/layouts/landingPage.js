@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 import '../style/index';
 
-const TemplateWrapper = ({ children }) => (
+const LandingPage = ({ children }) => (
   <div>
     {children()}
   </div>
 );
 
-TemplateWrapper.propTypes = {
+LandingPage.propTypes = {
   children: PropTypes.func
 };
 
-export default TemplateWrapper;
+export default LandingPage;

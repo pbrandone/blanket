@@ -1,13 +1,44 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from 'react';
+import { graphql } from 'graphql';
 
-const IndexPage = () => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </div>
-)
+import { siteContentData } from '../constants/propTypes';
 
-export default IndexPage
+const IndexPage = ({ data }) => {
+  console.log(data);
+
+  return (
+    <div>
+      Home
+    </div>
+  );
+};
+
+IndexPage.propTypes = {
+  ...siteContentData
+};
+
+export default IndexPage;
+
+export const query = graphql`
+  query IndexPage {
+    siteContent: allPrismicDocument(filter: { type: {ne: "collection" } } ) {
+      edges {
+        node {
+          data {
+            siteTitle
+            siteDescription {
+              text
+            }
+            coverImage {
+              url
+            }
+            phoneNumber
+            emailAddress
+            instagramUrl
+            facebookUrl
+          }
+        }
+      }
+    }
+  }
+`;
