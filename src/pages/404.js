@@ -1,10 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import { Text } from '../components/Typography/Typography';
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
 
 const NotFoundPage = () => (
-  <div>
-    <h1>NOT FOUND</h1>
-    <p>The page you&#39;re looking for doesn&#39; exist</p>
-  </div>
+  <Wrapper>
+    <Text>Not found</Text>
+  </Wrapper>
 );
 
 export default NotFoundPage;
