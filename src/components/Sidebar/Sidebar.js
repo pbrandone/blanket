@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
 import collectionsRoute from '../../constants/collectionsRoute';
 
-import { Label, Link } from '../Typography/Typography';
+import { Label, MenuLink } from '../Typography/Typography';
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,11 +47,11 @@ const Sidebar = ({ collections }) => {
           const { node: { data: collection, uid } } = edge;
 
           return (
-            <Link key={uid} to={`/${collectionsRoute}/${uid}`}>
+            <MenuLink key={uid} to={`/${collectionsRoute}/${uid}`}>
               <h1>
                 {collection.collectionTitle[0].text}
               </h1>
-            </Link>
+            </MenuLink>
           );
         })}
       </MenuWrapper>
@@ -61,9 +61,9 @@ const Sidebar = ({ collections }) => {
           About
         </Label>
 
-        <Link to="/contact">
+        <MenuLink to="/contact">
           Contact
-        </Link>
+        </MenuLink>
       </MenuWrapper>
     </Wrapper>
   );
