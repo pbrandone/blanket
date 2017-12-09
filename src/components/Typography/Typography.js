@@ -16,10 +16,11 @@ export const Text = styled.p`
   color: black;
 `;
 
-export const Link = styled(GatsbyLink).attrs({
+export const MenuLink = styled(GatsbyLink).attrs({
   exact: true,
   activeClassName: 'is-active'
 })`
+  position: relative;
   font-size: 18px;
   line-height: 26px;
   color: #727476;
@@ -32,7 +33,39 @@ export const Link = styled(GatsbyLink).attrs({
     color: black;
   }
 
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+
+    left: 0;
+    bottom: 4px;
+
+    width: 0;
+    height: 2px;
+
+    background-color: black;
+
+    transition: width cubic-bezier(.19, 1, .22, 1) 750ms;
+  }
+
   &.is-active {
+    color: black;
+
+    &:after {
+      width: 100%;
+    }
+  }
+`;
+
+export const Link = styled.a`
+  font-size: 18px;
+  line-height: 26px;
+  color: #727476;
+
+  text-decoration: none;
+
+  &:hover {
     color: black;
   }
 `;
