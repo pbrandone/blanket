@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { allPrismicDocumentNode } from '../constants/propTypes';
 
+import MetaHead from '../components/SEO/MetaHead';
+
 const Gallery = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,10 +26,28 @@ const Gallery = styled.div`
 
 const CollectionTemplate = ({ data }) => {
   const { node: { data: collection } } = data.allPrismicDocument.edges[0];
+  const {
+    collectionTitle,
+    gallery,
+    keywords,
+    seoDescription,
+    openGraphImage: { url: image }
+  } = collection;
+  const title = collectionTitle[0].text;
+  const description = seoDescription[0].text;
 
   return (
     <Gallery>
-      {collection.gallery.map(({ photo }, i) => <img key={i} src={photo.url} />)}
+
+      <MetaHead
+        title={title}
+        description={description}
+        keywords={keywords}
+        image={image}
+      />
+
+      {gallery.map(({ photo }, i) => <img key={i} src={photo.url} />)}
+
     </Gallery>
   );
 };
@@ -35,13 +55,27 @@ const CollectionTemplate = ({ data }) => {
 CollectionTemplate.propTypes = {
   ...allPrismicDocumentNode({
     data: PropTypes.shape({
+      collectionTitle: PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired,
       gallery: PropTypes.arrayOf(
         PropTypes.shape({
           photo: PropTypes.shape({
             url: PropTypes.string.isRequired
           }).isRequired
         }).isRequired
-      ).isRequired
+      ).isRequired,
+      keywords: PropTypes.string.isRequired,
+      seoDescription: PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired,
+      openGraphImage: PropTypes.shape({
+        url: PropTypes.string.isRequired
+      }).isRequired
     }).isRequired
   })
 };
@@ -53,12 +87,21 @@ export const query = graphql`
     allPrismicDocument(filter: { uid: { eq: $slug } } ) {
       edges {
         node {
-          uid
           data {
+            collectionTitle {
+              text
+            }
             gallery {
               photo {
                 url
               }
+            }
+            keywords
+            seoDescription {
+              text
+            }
+            openGraphImage {
+              url
             }
           }
         }

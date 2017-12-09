@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const allPrismicDocumentNode = (propTypes) => ({
+export const allPrismicDocumentNode = (propTypes, extra) => ({
   data: PropTypes.shape({
     allPrismicDocument: PropTypes.shape({
       edges: PropTypes.arrayOf(
@@ -10,6 +10,7 @@ export const allPrismicDocumentNode = (propTypes) => ({
           }).isRequired
         }).isRequired
       ).isRequired
-    }).isRequired
+    }).isRequired,
+    ...extra
   }).isRequired
 });
