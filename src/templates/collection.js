@@ -1,39 +1,60 @@
 import React from 'react';
-import { graphql } from 'graphql';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { collectionsData } from '../constants/propTypes';
+import { allPrismicDocumentNode } from '../constants/propTypes';
+
+const Gallery = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  img {
+    max-width: 100%;
+    max-height: calc(100vh - 100px);
+    height: auto;
+
+    margin-bottom: 50px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;
 
 const CollectionTemplate = ({ data }) => {
-  const { node: { data: collection } } = data.collection.edges[0];
-  const { text: title } = collection.collection_title[0];
+  const { node: { data: collection } } = data.allPrismicDocument.edges[0];
 
   return (
-    <div>
-      <h1>{title}</h1>
-
-      <div>
-        {collection.gallery.map(({ photo }, i) => <img key={i} src={photo.url} />)}
-      </div>
-    </div>
+    <Gallery>
+      {collection.gallery.map(({ photo }, i) => <img key={i} src={photo.url} />)}
+    </Gallery>
   );
 };
 
 CollectionTemplate.propTypes = {
-  ...collectionsData
+  ...allPrismicDocumentNode({
+    data: PropTypes.shape({
+      gallery: PropTypes.arrayOf(
+        PropTypes.shape({
+          photo: PropTypes.shape({
+            url: PropTypes.string.isRequired
+          }).isRequired
+        }).isRequired
+      ).isRequired
+    }).isRequired
+  })
 };
 
 export default CollectionTemplate;
 
 export const query = graphql`
   query Collection($slug: String!) {
-    collections: allPrismicDocument(filter: { uid: { eq: $slug } } ) {
+    allPrismicDocument(filter: { uid: { eq: $slug } } ) {
       edges {
         node {
           uid
           data {
-            collectionTitle {
-              text
-            }
             gallery {
               photo {
                 url
