@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import GatsbyLink from 'gatsby-link';
 
+import { cubic } from '../../style/utils';
+
 export const Label = styled.span`
   font-family: SFUIText-Regular;
   font-size: 12px;
@@ -46,7 +48,7 @@ export const MenuLink = styled(GatsbyLink).attrs({
 
     background-color: black;
 
-    transition: width cubic-bezier(.19, 1, .22, 1) 750ms;
+    transition: width ${cubic()};
   }
 
   &.is-active {
@@ -64,6 +66,16 @@ export const Link = styled.a`
   color: #727476;
 
   text-decoration: none;
+
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  hyphens: auto;
 
   &:hover {
     color: black;

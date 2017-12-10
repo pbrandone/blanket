@@ -7,21 +7,17 @@ import { allPrismicDocumentNode } from '../constants/propTypes';
 
 import MetaHead from '../components/SEO/MetaHead';
 import Sidebar from '../components/Sidebar/Sidebar';
+import Menu from '../components/Sidebar/Menu';
 
 const Wrapper = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
-`;
 
-const SidebarWrapper = styled.div`
-  flex-basis: 300px;
-  flex-shrink: 0;
-
-  overflow-y: scroll;
-
-  margin: 50px;
-  background-color: white;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    overflow: hidden;
+  }
 `;
 
 const Content = styled.div`
@@ -30,6 +26,12 @@ const Content = styled.div`
 
   overflow: hidden;
   overflow-y: scroll;
+
+  -webkit-overflow-scrolling: touch;
+
+  @media (max-width: 500px) {
+    padding: 24px;
+  }
 `;
 
 const TemplateWrapper = ({ children, data }) => {
@@ -52,9 +54,9 @@ const TemplateWrapper = ({ children, data }) => {
         image={image}
       />
 
-      <SidebarWrapper>
-        <Sidebar collections={collections} />
-      </SidebarWrapper>
+      <Sidebar>
+        <Menu collections={collections} />
+      </Sidebar>
 
       <Content>
         {children()}

@@ -1,89 +1,120 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import logo from '../../assets/logo.svg';
-import collectionsRoute from '../../constants/collectionsRoute';
+import { cubic } from '../../style/utils';
 
-import { Label, MenuLink } from '../Typography/Typography';
+import Hamburguer from './Hamburguer';
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-basis: 300px;
+  flex-shrink: 0;
 
+  overflow-y: scroll;
+
+  margin: 50px;
   padding: 24px;
+
+  background-color: white;
+
+  transition: flex-basis ${cubic()};
+
+  @media (max-width: 1024px) {
+    flex-basis: 200px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+
+    overflow-y: ${p => p.open ? 'scroll' : 'hidden'};
+    flex-basis: ${p => p.open ? '100%' : '70px'};
+
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.05),
+                0px 4px 8px rgba(0,0,0,0.05);
+
+    z-index: 999;
+  }
+`;
+
+const MobileMenu = styled.div``;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin-bottom: 80px;
+
+  @media (min-width: 769px) {
+    & ${MobileMenu} {
+      display: none;
+    }
+  }
 `;
 
 const Logo = styled.img.attrs({
   src: logo
 })`
-  margin-bottom: 80px;
-`;
+  height: 26px;
+  width: auto;
 
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  margin-bottom: 40px;
-
-  &:last-child {
-    margin-bottom: 0;
+  @media (max-width: 768px) {
+    height: 20px;
   }
 `;
 
-const Sidebar = ({ collections }) => {
-  return (
-    <Wrapper>
-      <Logo />
+class Sidebar extends Component {
+  constructor() {
+    super();
 
-      <MenuWrapper>
-        <Label>
-          Photography
-        </Label>
+    this.state = {
+      isMenuOpen: false
+    };
+  }
 
-        {collections.map(edge => {
-          const { node: { data: collection, uid } } = edge;
+  componentWillReceiveProps(newProps) {
+    const { location: { pathname: newPath } } = newProps;
+    const { location: { pathname: oldPath } } = this.props;
 
-          return (
-            <MenuLink key={uid} to={`/${collectionsRoute}/${uid}`}>
-              <h1>
-                {collection.collectionTitle[0].text}
-              </h1>
-            </MenuLink>
-          );
-        })}
-      </MenuWrapper>
+    // close the mobile menu when changing route
+    if (newPath !== oldPath) {
+      this.setState({ isMenuOpen: false });
+    }
+  }
 
-      <MenuWrapper>
-        <Label>
-          About
-        </Label>
+  toggleMenu() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
 
-        <MenuLink to="/contact">
-          Contact
-        </MenuLink>
-      </MenuWrapper>
-    </Wrapper>
-  );
-};
+  render() {
+    return (
+      <Wrapper open={this.state.isMenuOpen}>
+
+        <Header onClick={this.toggleMenu.bind(this)}>
+          <Logo />
+          <MobileMenu>
+            <Hamburguer
+              open={this.state.isMenuOpen}
+            />
+          </MobileMenu>
+        </Header>
+
+        {this.props.children}
+
+      </Wrapper>
+    );
+  }
+}
 
 Sidebar.propTypes = {
-  collections: PropTypes.arrayOf(
-    PropTypes.shape({
-      node: PropTypes.shape({
-        uid: PropTypes.string.isRequired,
-        data: PropTypes.shape({
-          collectionTitle: PropTypes.arrayOf(
-            PropTypes.shape({
-              text: PropTypes.string.isRequired
-            }).isRequired
-          ).isRequired
-        }).isRequired
-      }).isRequired
-    }).isRequired
-  ).isRequired
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  children: PropTypes.element.isRequired
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);
