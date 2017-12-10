@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { allPrismicDocumentNode } from '../constants/propTypes';
 
 import MetaHead from '../components/SEO/MetaHead';
+import PageTitle from '../components/Typography/PageTitle';
 
 const Gallery = styled.div`
   display: flex;
@@ -55,6 +56,10 @@ const CollectionTemplate = ({ data }) => {
         keywords={keywords}
         image={image}
       />
+
+      <PageTitle>
+        {title}
+      </PageTitle>
 
       {gallery.map(({ photo }, i) => <img key={i} src={photo.url} />)}
 

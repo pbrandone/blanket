@@ -5,12 +5,17 @@ import styled from 'styled-components';
 import { allPrismicDocumentNode } from '../constants/propTypes';
 
 import { Label, Link } from '../components/Typography/Typography';
+import PageTitle from '../components/Typography/PageTitle';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 
   padding: 24px;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 const Inner = styled.div`
@@ -40,6 +45,11 @@ const Contact = ({ data }) => {
   return (
     <Wrapper>
       <Inner>
+
+        <PageTitle>
+          Contact
+        </PageTitle>
+
         <Block>
           <Label>
             Phone number
