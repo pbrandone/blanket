@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import { cubic } from '../../style/utils';
+import { cubic } from '../../../style/utils';
 
 const Wrapper = styled.div`
   position: relative;

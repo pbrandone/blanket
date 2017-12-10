@@ -7,19 +7,7 @@ import image from '../../assets/blanket-white@2x.png';
 
 import collectionsRoute from '../../constants/collectionsRoute';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 100vh;
-  width: 100vw;
-
-  background-image: url(${p => p.image});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-`;
+import FullImage from '../Layout/FullImage';
 
 const Logo = styled.img.attrs({
   src: image
@@ -42,11 +30,11 @@ class Home extends Component {
   render() {
     const { coverImageUrl } = this.props;
     return (
-      <Wrapper image={coverImageUrl}>
+      <FullImage image={coverImageUrl}>
         <Link to={collectionsRoute}>
           <Logo />
         </Link>
-      </Wrapper>
+      </FullImage>
     );
   }
 }

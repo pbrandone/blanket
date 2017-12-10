@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
-import logo from '../../assets/logo.svg';
-import { cubic } from '../../style/utils';
+import logo from '../../../assets/logo.svg';
+import { cubic } from '../../../style/utils';
 
 import Hamburguer from './Hamburguer';
 

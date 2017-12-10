@@ -1,39 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import { allPrismicDocumentNode } from '../constants/propTypes';
 
 import MetaHead from '../components/SEO/MetaHead';
 import PageTitle from '../components/Typography/PageTitle';
-
-const Gallery = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  img {
-    max-width: 100%;
-    max-height: calc(100vh - 100px);
-    height: auto;
-
-    margin-bottom: 50px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @media (max-width: 500px) {
-      max-height: calc(100vh - 48px);
-
-      margin-bottom: 24px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-`;
+import { Gallery } from '../components/Layout/Gallery';
 
 const CollectionTemplate = ({ data }) => {
   const { node: { data: collection } } = data.allPrismicDocument.edges[0];
