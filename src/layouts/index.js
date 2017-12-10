@@ -15,8 +15,9 @@ const Wrapper = styled.div`
   height: 100vh;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    overflow: hidden;
+    padding-top: 70px;
+
+    display: block;
   }
 `;
 
@@ -27,7 +28,9 @@ const Content = styled.div`
   overflow: hidden;
   overflow-y: scroll;
 
-  -webkit-overflow-scrolling: touch;
+  @media (max-width: 768px) {
+    overflow: visible;
+  }
 
   @media (max-width: 500px) {
     padding: 24px;
