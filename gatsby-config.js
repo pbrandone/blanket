@@ -8,8 +8,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'blanket',
-        accessToken: 'MC5XaXJ5WGlrQUFDTm9fZ0xY.XXvvv73vv70n77-9Xwnvv73vv73vv70TBu-_ve-_vRbvv71zU0xB77-9RFfvv73vv71b77-977-9ABPvv70'
+        repositoryName: 'blanketphotography',
+        accessToken: 'MC5XaTFNcUNrQUFNRUpKcjJx.77-977-977-977-977-9IDnvv73vv73vv71I77-9LO-_ve-_ve-_vSTvv73vv73vv73vv71TRH3vv71eQxjvv70LEGE'
       }
     },
     {
