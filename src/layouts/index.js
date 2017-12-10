@@ -1,38 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import '../style/index';
 import { allPrismicDocumentNode } from '../constants/propTypes';
 
+import { Wrapper, Content } from '../components/Layout/Layout';
+import Sidebar from '../components/Layout/Sidebar/Sidebar';
+import Menu from '../components/Layout/Sidebar/Menu';
 import MetaHead from '../components/SEO/MetaHead';
-import Sidebar from '../components/Sidebar/Sidebar';
-import Menu from '../components/Sidebar/Menu';
-
-const Wrapper = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    overflow: hidden;
-  }
-`;
-
-const Content = styled.div`
-  flex-basis: 100%;
-  padding: 50px;
-
-  overflow: hidden;
-  overflow-y: scroll;
-
-  -webkit-overflow-scrolling: touch;
-
-  @media (max-width: 500px) {
-    padding: 24px;
-  }
-`;
 
 const TemplateWrapper = ({ children, data }) => {
   const { allPrismicDocument: { edges: collections } } = data;

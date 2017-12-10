@@ -4,7 +4,6 @@ import GatsbyLink from 'gatsby-link';
 import { cubic } from '../../style/utils';
 
 export const Label = styled.span`
-  font-family: SFUIText-Regular;
   font-size: 12px;
   text-transform: uppercase;
   color: #a2a4a6;
@@ -15,6 +14,12 @@ export const Label = styled.span`
 export const Text = styled.p`
   font-size: 18px;
   line-height: 26px;
+  color: black;
+`;
+
+export const Title = styled.h1`
+  font-size: 24px;
+  line-height: 32px;
   color: black;
 `;
 

@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   justify-content: flex-end;
 
   padding: 24px;
+
+  @media (max-width: 768px) {
+    padding: 24px 0 0;
+  }
 `;
 
 const Inner = styled.div`

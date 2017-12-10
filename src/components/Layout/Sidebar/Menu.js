@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import collectionsRoute from '../../constants/collectionsRoute';
+import collectionsRoute from '../../../constants/collectionsRoute';
 
-import { Label, MenuLink } from '../Typography/Typography';
+import { Label, MenuLink } from '../../Typography/Typography';
 
 const MenuWrapper = styled.div`
   display: flex;

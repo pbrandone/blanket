@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
-import logo from '../../assets/logo.svg';
-import { cubic } from '../../style/utils';
+import logo from '../../../assets/logo.svg';
+import { cubic } from '../../../style/utils';
 
 import Hamburguer from './Hamburguer';
 
@@ -19,20 +19,25 @@ const Wrapper = styled.div`
 
   background-color: white;
 
-  transition: flex-basis ${cubic()};
-
   @media (max-width: 1024px) {
     flex-basis: 200px;
   }
 
   @media (max-width: 768px) {
-    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 
-    overflow-y: ${p => p.open ? 'scroll' : 'hidden'};
-    flex-basis: ${p => p.open ? '100%' : '70px'};
+    overflow-y: hidden;
+
+    height: ${p => p.open ? '100%' : '70px'};
+    margin: 0;
 
     box-shadow: 0px 1px 2px rgba(0,0,0,0.05),
                 0px 4px 8px rgba(0,0,0,0.05);
+
+    transition: height ${cubic()};
 
     z-index: 999;
   }
